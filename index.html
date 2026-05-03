@@ -1,0 +1,645 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>EcoMaster · Referência rápida em Ecocardiografia</title>
+  <meta name="description" content="Referência rápida, calculadoras e laudo assistido para ecocardiografia adulto, pediátrica, neonatal e fetal." />
+  <meta name="theme-color" content="#111318" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600;700;800&family=DM+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <div class="ambient-grid" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#top" aria-label="EcoMaster">
+        <div class="brand-mark">E</div>
+        <div class="brand-text">
+          <strong>EcoMaster</strong>
+          <span>Referência rápida · Cálculo · Laudo assistido</span>
+        </div>
+      </a>
+
+      <nav class="nav" aria-label="Navegação principal">
+        <a href="#referencias" class="nav-link active">Referência</a>
+        <a href="#calculadoras" class="nav-link">Calculadoras</a>
+        <a href="#fluxo" class="nav-link">Fluxo do exame</a>
+        <a href="#pro" class="nav-link">Pro</a>
+      </nav>
+
+      <div class="header-actions">
+        <button class="btn btn-ghost" id="themeBtn" type="button">
+          <i data-lucide="moon"></i>
+          Tema
+        </button>
+
+        <button class="btn btn-primary" type="button" onclick="scrollToSection('calculadoras')">
+          <i data-lucide="calculator"></i>
+          Calcular
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <div class="eyebrow">Ecocardiografia na rotina real</div>
+
+          <h1>
+            Ache o valor.
+            Calcule.
+            Interprete.
+            <em>Laude com método.</em>
+          </h1>
+
+          <p class="hero-sub">
+            Referência rápida para quem faz eco todos os dias: siglas, cortes,
+            fórmulas, indexações e raciocínio estruturado em uma interface única.
+          </p>
+
+          <div class="search-hero" role="search">
+            <i data-lucide="search"></i>
+            <input
+              id="globalSearch"
+              type="search"
+              autocomplete="off"
+              placeholder="Buscar DDVE, FEVE, LAVI, TAPSE, PSAP, E/e’, Z-score..."
+              aria-label="Buscar sigla, medida ou cálculo"
+            />
+            <button type="button" id="clearSearchBtn" aria-label="Limpar busca">
+              <i data-lucide="x"></i>
+            </button>
+          </div>
+
+          <div class="quick-actions" aria-label="Atalhos mais usados">
+            <button type="button" data-search-shortcut="FEVE">FEVE</button>
+            <button type="button" data-search-shortcut="PSAP">PSAP</button>
+            <button type="button" data-search-shortcut="LAVI">LAVI</button>
+            <button type="button" data-search-shortcut="DDVE">DDVE</button>
+            <button type="button" data-search-shortcut="TAPSE">TAPSE</button>
+            <button type="button" data-search-shortcut="E/e’">E/e’</button>
+            <button type="button" data-search-shortcut="Massa VE">Massa VE</button>
+            <button type="button" data-search-shortcut="Z-score">Z-score</button>
+          </div>
+
+          <div class="hero-actions">
+            <button class="btn btn-primary" type="button" onclick="scrollToSection('referencias')">
+              <i data-lucide="layout-grid"></i>
+              Referência rápida
+            </button>
+
+            <button class="btn btn-red" type="button" onclick="scrollToSection('pro')">
+              <i data-lucide="lock-keyhole"></i>
+              Ver Pro
+            </button>
+          </div>
+        </div>
+
+        <aside class="hero-panel" aria-label="Resumo do produto">
+          <div class="hero-panel-top">
+            <span class="panel-kicker">EcoMaster Free</span>
+            <strong>Calculadoras e valores de referência</strong>
+            <p>
+              Consulta rápida por sigla, domínio anatômico ou cálculo. A camada Pro
+              libera fluxo guiado, interpretação e frases de laudo.
+            </p>
+          </div>
+
+          <div class="mini-grid">
+            <div class="mini-card">
+              <span>Modo atual</span>
+              <strong id="modeLabel">Adulto</strong>
+            </div>
+
+            <div class="mini-card">
+              <span>Busca</span>
+              <strong>Siglas BR</strong>
+            </div>
+
+            <div class="mini-card">
+              <span>Free</span>
+              <strong>Referência</strong>
+            </div>
+
+            <div class="mini-card locked-mini">
+              <span>Pro</span>
+              <strong>Laudo assistido</strong>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="mode-switch-section">
+      <div class="container">
+        <div class="mode-card">
+          <div>
+            <span class="eyebrow">Contexto de interpretação</span>
+            <h2>Um mesmo número. Quatro leituras possíveis.</h2>
+          </div>
+
+          <div class="segmented" role="tablist" aria-label="Modo de visualização">
+            <button class="segment active" type="button" data-mode="adulto">Adulto</button>
+            <button class="segment" type="button" data-mode="pediatrico">Pediátrico</button>
+            <button class="segment" type="button" data-mode="neonatal">Neonatal</button>
+            <button class="segment" type="button" data-mode="fetal">Fetal</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="referencias">
+      <div class="container">
+        <div class="section-head compact-head">
+          <div>
+            <div class="eyebrow">Referência rápida</div>
+            <h2>Valores que o médico precisa achar sem perder tempo.</h2>
+          </div>
+
+          <p>
+            Cards curtos por domínio. Clique para abrir detalhes, método, armadilhas
+            e recursos Pro.
+          </p>
+        </div>
+
+        <div class="reference-toolbar">
+          <button class="chip active" type="button" data-domain="all">Todos</button>
+          <button class="chip" type="button" data-domain="ve">VE</button>
+          <button class="chip" type="button" data-domain="vd">VD</button>
+          <button class="chip" type="button" data-domain="atrio">Átrios</button>
+          <button class="chip" type="button" data-domain="valvas">Valvas</button>
+          <button class="chip" type="button" data-domain="hemo">Hemodinâmica</button>
+          <button class="chip" type="button" data-domain="aorta">Aorta</button>
+          <button class="chip" type="button" data-domain="pediatria">Pediatria</button>
+        </div>
+
+        <div class="cards-grid" id="adultCards"></div>
+
+        <div class="empty-state" id="emptySearchState" hidden>
+          <i data-lucide="search-x"></i>
+          <strong>Nenhum resultado encontrado.</strong>
+          <span>Tente buscar por siglas usadas no laudo: DDVE, FEVE, LAVI, TAPSE, PSAP, VCI, E/e’.</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="calculadoras">
+      <div class="container">
+        <div class="section-head compact-head">
+          <div>
+            <div class="eyebrow">Calculadoras Free</div>
+            <h2>Medida preenchida. Raciocínio mais rápido.</h2>
+          </div>
+
+          <p>
+            Cálculos essenciais da rotina. A interpretação completa e a frase de laudo
+            ficam na versão Pro.
+          </p>
+        </div>
+
+        <div class="calculator-grid">
+          <article class="calc-card">
+            <div class="calc-head">
+              <h3>Paciente</h3>
+              <span>BSA e indexação</span>
+            </div>
+
+            <div class="form-grid">
+              <label>
+                Sexo
+                <select id="sexInput">
+                  <option value="female">Feminino</option>
+                  <option value="male">Masculino</option>
+                </select>
+              </label>
+
+              <label>
+                Idade
+                <input id="ageInput" type="number" min="0" step="0.1" value="35" />
+              </label>
+
+              <label>
+                Peso
+                <input id="weightInput" type="number" min="0" step="0.1" value="70" />
+                <span class="unit">kg</span>
+              </label>
+
+              <label>
+                Altura
+                <input id="heightInput" type="number" min="0" step="0.1" value="165" />
+                <span class="unit">cm</span>
+              </label>
+            </div>
+
+            <div class="result-strip">
+              <span>BSA estimada</span>
+              <strong id="bsaResult">-- m²</strong>
+            </div>
+          </article>
+
+          <article class="calc-card">
+            <div class="calc-head">
+              <h3>VD / PSAP</h3>
+              <span>IT, PAD, TAPSE, FAC</span>
+            </div>
+
+            <div class="form-grid">
+              <label>
+                Velocidade IT
+                <input id="trvInput" type="number" min="0" step="0.1" value="2.8" />
+                <span class="unit">m/s</span>
+              </label>
+
+              <label>
+                PAD estimada
+                <input id="rapInput" type="number" min="0" step="1" value="3" />
+                <span class="unit">mmHg</span>
+              </label>
+
+              <label>
+                TAPSE
+                <input id="tapseInput" type="number" min="0" step="1" value="20" />
+                <span class="unit">mm</span>
+              </label>
+
+              <label>
+                FAC VD
+                <input id="facInput" type="number" min="0" max="100" step="1" value="40" />
+                <span class="unit">%</span>
+              </label>
+            </div>
+
+            <div class="result-stack">
+              <div>
+                <span>PSAP estimada</span>
+                <strong id="psapResult">-- mmHg</strong>
+              </div>
+
+              <div>
+                <span>Função sistólica VD</span>
+                <strong id="rvFunctionResult">--</strong>
+              </div>
+            </div>
+
+            <button class="pro-inline" type="button" onclick="openLeadModal('psap')">
+              Classificar probabilidade de HP
+              <span>Pro</span>
+            </button>
+          </article>
+
+          <article class="calc-card">
+            <div class="calc-head">
+              <h3>VE</h3>
+              <span>Massa, ERP e geometria</span>
+            </div>
+
+            <div class="form-grid">
+              <label>
+                DDVE / LVIDd
+                <input id="lviddInput" type="number" min="0" step="1" value="48" />
+                <span class="unit">mm</span>
+              </label>
+
+              <label>
+                SIVd
+                <input id="ivsdInput" type="number" min="0" step="1" value="9" />
+                <span class="unit">mm</span>
+              </label>
+
+              <label>
+                PPd
+                <input id="pwdInput" type="number" min="0" step="1" value="9" />
+                <span class="unit">mm</span>
+              </label>
+
+              <label>
+                FEVE
+                <input id="lvefInput" type="number" min="0" max="100" step="1" value="60" />
+                <span class="unit">%</span>
+              </label>
+            </div>
+
+            <div class="result-stack">
+              <div>
+                <span>IMVE</span>
+                <strong id="lvmiResult">-- g/m²</strong>
+              </div>
+
+              <div>
+                <span>Geometria</span>
+                <strong id="geometryResult">--</strong>
+              </div>
+            </div>
+
+            <button class="pro-inline" type="button" onclick="openLeadModal('ve')">
+              Gerar frase de laudo
+              <span>Pro</span>
+            </button>
+          </article>
+
+          <article class="calc-card">
+            <div class="calc-head">
+              <h3>AE / Pediatria</h3>
+              <span>LAVI e Z-score manual</span>
+            </div>
+
+            <div class="form-grid">
+              <label>
+                Volume AE
+                <input id="lavInput" type="number" min="0" step="1" value="50" />
+                <span class="unit">mL</span>
+              </label>
+
+              <label>
+                Z-score informado
+                <input id="zInput" type="number" step="0.1" value="1.2" />
+              </label>
+            </div>
+
+            <div class="result-stack">
+              <div>
+                <span>LAVI</span>
+                <strong id="laviResult">-- mL/m²</strong>
+              </div>
+
+              <div>
+                <span>Z-score</span>
+                <strong id="zResult">--</strong>
+              </div>
+            </div>
+
+            <button class="pro-inline" type="button" onclick="openLeadModal('zscore')">
+              Calcular por nomograma
+              <span>Pro</span>
+            </button>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="fluxo">
+      <div class="container">
+        <div class="section-head compact-head">
+          <div>
+            <div class="eyebrow">Fluxo do exame</div>
+            <h2>Modo máquina ou modo laudo.</h2>
+          </div>
+
+          <p>
+            A camada Pro transforma o guia em passo a passo de aquisição,
+            medidas obrigatórias e checagem antes da conclusão.
+          </p>
+        </div>
+
+        <div class="workflow-shell">
+          <div class="workflow-tabs" role="tablist" aria-label="Modo de fluxo">
+            <button class="workflow-tab active" type="button" data-workflow="maquina">Modo máquina</button>
+            <button class="workflow-tab" type="button" data-workflow="laudo">Modo laudo</button>
+          </div>
+
+          <div class="workflow-track" id="workflowTrack">
+            <button type="button" class="workflow-step active" data-step="paciente">
+              <span>01</span>
+              Paciente
+            </button>
+
+            <button type="button" class="workflow-step" data-step="plax">
+              <span>02</span>
+              PLAX
+            </button>
+
+            <button type="button" class="workflow-step" data-step="psax">
+              <span>03</span>
+              PSAX
+            </button>
+
+            <button type="button" class="workflow-step" data-step="a4c">
+              <span>04</span>
+              A4C
+            </button>
+
+            <button type="button" class="workflow-step" data-step="a2c">
+              <span>05</span>
+              A2C
+            </button>
+
+            <button type="button" class="workflow-step" data-step="doppler">
+              <span>06</span>
+              Doppler
+            </button>
+
+            <button type="button" class="workflow-step" data-step="valvas">
+              <span>07</span>
+              Valvas
+            </button>
+
+            <button type="button" class="workflow-step locked-step" data-step="conclusao">
+              <span>Pro</span>
+              Conclusão
+            </button>
+          </div>
+
+          <article class="workflow-preview">
+            <div>
+              <span class="eyebrow">Preview Pro</span>
+              <h3 id="workflowTitle">Paciente</h3>
+              <p id="workflowText">
+                Registre sexo, idade, peso, altura, PA, FC, ritmo e qualidade da janela antes da leitura.
+              </p>
+            </div>
+
+            <button class="btn btn-red" type="button" onclick="openLeadModal('workflow')">
+              Desbloquear passo a passo
+            </button>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="pro">
+      <div class="container">
+        <div class="section-head compact-head">
+          <div>
+            <div class="eyebrow">EcoMaster Pro</div>
+            <h2>O médico entra para consultar. Assina para laudar com segurança.</h2>
+          </div>
+
+          <p>
+            A assinatura transforma valores soltos em fluxo, interpretação,
+            checklist técnico e texto de laudo.
+          </p>
+        </div>
+
+        <div class="pro-grid">
+          <article class="pro-card main-pro">
+            <span class="eyebrow">Laudo assistido</span>
+            <h3>Preencha as medidas. Receba síntese, alertas e frase sugerida.</h3>
+
+            <div class="clinical-output" id="clinicalOutput">
+              Preencha as calculadoras para gerar uma síntese interpretativa.
+            </div>
+
+            <div class="pro-actions">
+              <button class="btn btn-primary" type="button" onclick="generateClinicalSummary()">
+                Gerar síntese Free
+              </button>
+
+              <button class="btn btn-red" type="button" onclick="openLeadModal('laudo')">
+                Liberar laudo Pro
+              </button>
+            </div>
+          </article>
+
+          <article class="pro-card">
+            <i data-lucide="clipboard-check"></i>
+            <h3>Checklist por janela</h3>
+            <p>PLAX, PSAX, A4C, A2C, Doppler, subcostal e supraesternal.</p>
+            <span class="pro-badge">Pro</span>
+          </article>
+
+          <article class="pro-card">
+            <i data-lucide="file-text"></i>
+            <h3>Frases de laudo</h3>
+            <p>Texto técnico, curto e padronizado para achados frequentes.</p>
+            <span class="pro-badge">Pro</span>
+          </article>
+
+          <article class="pro-card">
+            <i data-lucide="git-compare"></i>
+            <h3>Comparação longitudinal</h3>
+            <p>Diferença entre exames, evolução de medidas e alerta de mudança relevante.</p>
+            <span class="pro-badge">Pro</span>
+          </article>
+
+          <article class="pro-card">
+            <i data-lucide="line-chart"></i>
+            <h3>Z-score real</h3>
+            <p>Nomogramas por estrutura, BSA e faixa etária na versão final.</p>
+            <span class="pro-badge">Pro</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section footer-cta">
+      <div class="container">
+        <div class="cta-card">
+          <div>
+            <span class="eyebrow">Produto médico digital</span>
+            <h2>Velocidade para rotina. Método para laudo. Segurança para treinamento.</h2>
+            <p>
+              Free para consulta e cálculo. Pro para fluxo guiado, interpretação,
+              checklist e laudo assistido.
+            </p>
+          </div>
+
+          <button class="btn btn-primary" type="button" onclick="openLeadModal('produto')">
+            Entrar na lista Pro
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <div>
+          <strong>EcoMaster</strong>
+          <span>Referência rápida e laudo assistido em ecocardiografia.</span>
+        </div>
+
+        <p>
+          Ferramenta de apoio educacional e operacional. Não substitui julgamento médico,
+          diretrizes vigentes, supervisão técnica ou validação por especialista.
+        </p>
+      </div>
+    </footer>
+  </main>
+
+  <aside class="detail-drawer" id="detailDrawer" aria-hidden="true">
+    <div class="drawer-backdrop" onclick="closeDetailDrawer()"></div>
+
+    <div class="drawer-panel" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+      <button class="drawer-close" type="button" onclick="closeDetailDrawer()" aria-label="Fechar">
+        <i data-lucide="x"></i>
+      </button>
+
+      <div class="drawer-content">
+        <span class="eyebrow" id="drawerDomain">Referência</span>
+        <h2 id="drawerTitle">Título</h2>
+        <p id="drawerDescription">Descrição</p>
+
+        <div class="drawer-values" id="drawerValues"></div>
+
+        <div class="drawer-note" id="drawerNote"></div>
+
+        <div class="drawer-pro">
+          <strong>Disponível no Pro</strong>
+          <span>Frase de laudo, erros comuns, checklist técnico e interpretação multiparamétrica.</span>
+          <button class="btn btn-red full" type="button" onclick="openLeadModal('drawer')">
+            Liberar recursos Pro
+          </button>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <div class="modal" id="leadModal" aria-hidden="true">
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="modal-close" type="button" onclick="closeLeadModal()" aria-label="Fechar">
+        <i data-lucide="x"></i>
+      </button>
+
+      <div class="modal-head">
+        <span class="eyebrow">EcoMaster Pro</span>
+        <h2 id="modalTitle">Lista de interesse profissional</h2>
+        <p>
+          Receba prioridade quando a versão com laudo assistido, fluxo guiado
+          e nomogramas pediátricos estiver disponível.
+        </p>
+      </div>
+
+      <form class="modal-form" onsubmit="submitLead(event)">
+        <label>
+          Nome
+          <input type="text" id="leadName" required placeholder="Seu nome" />
+        </label>
+
+        <label>
+          Perfil
+          <select id="leadProfile" required>
+            <option value="">Selecione</option>
+            <option>Cardiologista</option>
+            <option>Ecocardiografista</option>
+            <option>Cardiologia pediátrica</option>
+            <option>Clínica de imagem</option>
+            <option>Residência / preceptoria</option>
+          </select>
+        </label>
+
+        <label>
+          E-mail
+          <input type="email" id="leadEmail" required placeholder="email@dominio.com" />
+        </label>
+
+        <button class="btn btn-primary full" type="submit">Registrar interesse</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
