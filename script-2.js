@@ -281,7 +281,6 @@ function formatNumber(value, digits = 1) {
 function getInputNumber(id) {
   const el = document.getElementById(id);
   if (!el || !el.value) return NaN;
-  // SANITIZAÇÃO CRÍTICA: Prevenção contra a "vírgula" em inputs decimais no Brasil
   const sanitizedValue = el.value.replace(',', '.');
   const value = parseFloat(sanitizedValue);
   return Number.isFinite(value) ? value : NaN;
@@ -461,6 +460,7 @@ function openDetailDrawer(item) {
 
   drawer.classList.add("open");
   drawer.setAttribute("aria-hidden", "false");
+  if (window.lucide) lucide.createIcons();
 }
 
 function closeDetailDrawer() {
@@ -576,7 +576,6 @@ function generateClinicalSummary() {
   }
 
   if (Number.isFinite(r.z)) {
-    // RIGOR CIENTÍFICO APLICADO: Cita a fonte do z-score no laudo gerado
     lines.push(`Z-score aferido: ${formatNumber(r.z, 2)} (${r.zSource}) - Indica: ${r.zClass}.`);
   }
 
@@ -755,18 +754,17 @@ function initTheme() {
   const btn = document.getElementById("themeBtn");
   if (!btn) return;
 
-  // Sincroniza estado inicial do botão com a classe dark-mode estática do HTML
   const isDarkInitial = document.body.classList.contains("dark-mode");
   const iconInitial = isDarkInitial ? "sun" : "moon";
   const textInitial = isDarkInitial ? "Modo Claro" : "Tema Escuro";
-  btn.innerHTML = `<i data-lucide="${iconInitial}"></i> ${textInitial}`;
+  btn.innerHTML = `<i data-lucide="${iconInitial}"></i> <span id="themeText">${textInitial}</span>`;
 
   btn.addEventListener("click", () => {
     const isDark = document.body.classList.toggle("dark-mode");
     const icon = isDark ? "sun" : "moon";
     const text = isDark ? "Modo Claro" : "Tema Escuro";
     
-    btn.innerHTML = `<i data-lucide="${icon}"></i> ${text}`;
+    btn.innerHTML = `<i data-lucide="${icon}"></i> <span id="themeText">${text}</span>`;
 
     if (window.lucide) lucide.createIcons();
   });
@@ -779,7 +777,6 @@ function openLeadModal(source = "geral") {
   const title = document.getElementById("modalTitle");
   const text = document.querySelector("#leadModal .modal-head p");
 
-  // Gatilhos de Venda Refinados com base na ação do usuário
   if (source === "ocr") {
     title.textContent = "Extração Automática (OCR)";
     text.textContent = "Chega de digitar duas vezes. A funcionalidade Pro extrai as medidas diretamente da foto da tela do ultrassom e preenche as calculadoras. Entre na lista de espera para ter acesso antecipado.";
@@ -797,6 +794,7 @@ function openLeadModal(source = "geral") {
   modal.dataset.source = source;
   modal.classList.add("open");
   modal.setAttribute("aria-hidden", "false");
+  if (window.lucide) lucide.createIcons();
 }
 
 function closeLeadModal() {
@@ -866,6 +864,76 @@ function initKeyboardCards() {
   });
 }
 
+function initParticles() {
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduceMotion) return;
+
+  const canvas = document.getElementById("particleCanvas");
+  if (!canvas) return;
+  const ctx = canvas.getContext("2d");
+  let width = 0;
+  let height = 0;
+  let particles = [];
+  let running = true;
+  let animationId = null;
+
+  function resize() {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+  }
+
+  function makeParticle() {
+    return {
+      x: Math.random() * width,
+      y: Math.random() * height,
+      size: Math.random() * 1.8 + .5,
+      vx: (Math.random() - .5) * .24,
+      vy: (Math.random() - .5) * .24,
+      alpha: Math.random() * .18 + .035,
+      color: Math.random() > .55 ? "13,59,102" : "212,97,142"
+    };
+  }
+
+  function init() {
+    resize();
+    particles = Array.from({ length: 42 }, makeParticle);
+  }
+
+  function draw() {
+    if (!running) return;
+
+    ctx.clearRect(0, 0, width, height);
+
+    for (const p of particles) {
+      p.x += p.vx;
+      p.y += p.vy;
+
+      if (p.x < 0) p.x = width;
+      if (p.x > width) p.x = 0;
+      if (p.y < 0) p.y = height;
+      if (p.y > height) p.y = 0;
+
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${p.color},${p.alpha})`;
+      ctx.fill();
+    }
+
+    animationId = requestAnimationFrame(draw);
+  }
+
+  document.addEventListener("visibilitychange", () => {
+    running = !document.hidden;
+    if (running) draw();
+    else if (animationId) cancelAnimationFrame(animationId);
+  });
+
+  window.addEventListener("resize", resize);
+
+  init();
+  draw();
+}
+
 function init() {
   renderReferenceCards();
   initDomainFilters();
@@ -877,6 +945,7 @@ function init() {
   initTheme();
   initModalEvents();
   initKeyboardCards();
+  initParticles();
   updateCalculators();
 
   if (window.lucide) lucide.createIcons();
