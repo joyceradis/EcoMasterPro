@@ -4,8 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>EcoMaster · Referência e Cálculos em Ecocardiografia</title>
-  <meta name="description" content="Calculadoras, valores de referência (ASE/EACVI), Z-scores pediátricos e auxílio de laudo para ecocardiografistas." />
+  <title>EcoMaster · Referência rápida em Ecocardiografia</title>
+  <meta name="description" content="Referência rápida, calculadoras e laudo assistido para ecocardiografia adulto, pediátrica, neonatal e fetal." />
   <meta name="theme-color" content="#111827" /> 
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -38,9 +38,9 @@
       </nav>
 
       <div class="header-actions">
-        <button class="btn btn-ghost" id="themeBtn" type="button">
+        <button class="btn btn-ghost" id="themeBtn" type="button" aria-label="Alternar Tema">
           <i data-lucide="sun"></i>
-          Tema
+          <span id="themeText">Modo Claro</span>
         </button>
 
         <button class="btn btn-primary" type="button" onclick="scrollToSection('calculadoras')">
@@ -177,6 +177,11 @@
             <div class="eyebrow">Calculadoras Clínicas</div>
             <h2>Fórmulas e Indexações</h2>
           </div>
+          <div style="text-align: right;">
+            <button class="btn btn-ghost" type="button" onclick="openLeadModal('ocr')">
+              <i data-lucide="scan-line"></i> Extrair medidas do laudo (Pro)
+            </button>
+          </div>
         </div>
 
         <div class="calculator-grid">
@@ -305,7 +310,7 @@
             </div>
 
             <div style="display: flex; gap: 0.5rem; margin-top: 1rem;">
-              <button class="btn btn-ghost" style="flex:1; font-size: 0.7rem; padding: 0.5rem;" type="button" onclick="alert('VE com dimensões, espessuras e geometria normais. Função sistólica preservada.')">
+              <button class="btn btn-ghost" style="flex:1; font-size: 0.7rem; padding: 0.5rem;" type="button" onclick="alert('Ventrículo esquerdo com dimensões, espessuras e geometria normais. Função sistólica preservada.')">
                 Copiar Laudo Normal
               </button>
               <button class="pro-inline" style="flex:1; margin-top:0;" type="button" onclick="openLeadModal('ve')">
@@ -441,7 +446,7 @@
         <i data-lucide="x"></i>
       </button>
       <div class="drawer-content">
-        <span class="eyebrow" id="drawerDomain">Referência</span>
+        <span class="eyebrow" id="drawerDomain">Referência Clínica</span>
         <h2 id="drawerTitle">Título</h2>
         <p id="drawerDescription">Descrição</p>
         <div class="drawer-values" id="drawerValues"></div>
@@ -465,7 +470,7 @@
       <div class="modal-head">
         <span class="eyebrow">EcoMaster Pro</span>
         <h2 id="modalTitle">Lista de Espera</h2>
-        <p>Cadastre-se para ser notificado assim que as funções de laudo assistido e calculadoras avançadas (Z-Score completo) estiverem disponíveis.</p>
+        <p>Cadastre-se para ser notificado assim que as funções de laudo assistido e calculadoras avançadas estiverem disponíveis.</p>
       </div>
       <form class="modal-form" onsubmit="submitLead(event)">
         <label>Nome <input type="text" id="leadName" required placeholder="Seu nome" /></label>
