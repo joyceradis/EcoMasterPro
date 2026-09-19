@@ -2,6 +2,22 @@
 
 **Referência rápida, cálculos e raciocínio estruturado em ecocardiografia.**
 
+> **English:** Interactive echocardiography learning platform for structured cardiac-imaging education and clinical reasoning.
+
+[**Abrir demonstração**](https://joyceradis.github.io/EcoMasterPro/)
+
+## O que este repositório demonstra
+
+| Competência | Evidência no projeto |
+| --- | --- |
+| Modelagem de conhecimento médico | referências organizadas por domínio, população, contexto e armadilhas interpretativas |
+| Estruturação de conteúdo clínico | módulos para adulto, pediatria, neonatal e fetal representados como dados consumidos pela interface |
+| Lógica frontend | JavaScript para filtros, navegação, cálculos e apresentação contextual |
+| Clinical UX | desenho voltado a consulta rápida sem converter número isolado em conclusão diagnóstica |
+| Product thinking | transformação de conhecimento disperso em ferramenta interativa com regras explícitas de uso |
+
+**Portfolio signal:** medical knowledge modeling · JavaScript · clinical education · structured data · clinical UX · product design
+
 O EcoMaster Pro é uma aplicação web educacional criada para organizar parâmetros ecocardiográficos, cálculos derivados e etapas de interpretação em uma interface de consulta rápida. O projeto nasce da interseção entre medicina, educação e design de ferramentas clínicas.
 
 ## Objetivo
