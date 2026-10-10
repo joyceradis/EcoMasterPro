@@ -18,6 +18,16 @@ Ele **não** pertence automaticamente à Radis nem ao mecanismo de tentativas do
 
 **Rastreabilidade:** [histórico do README](https://github.com/joyceradis/EcoMasterPro/commits/main/README.md) · [PRs](https://github.com/joyceradis/EcoMasterPro/pulls?q=is%3Apr).
 
+## Encontrar a implementação
+
+| Necessidade | Onde consultar |
+|---|---|
+| Primeira interface e regras frontend | [`index.html`](index.html) · [`script.js`](script.js) · [`styles.css`](styles.css) |
+| Experimento de interface alternativo | [`index2.html`](index2.html) · [`script-2.js`](script-2.js) · [`styles-v2.css`](styles-v2.css) |
+| Escopo e desenvolvimento do produto | [Objetivo](#objetivo) · [Direção do produto](#direção-do-produto) |
+
+**Identidade:** produto educacional de ecocardiografia, com possibilidade futura de modelo comercial por assinatura. **Não** assumir integração com Radis, atendimento próprio ou assinatura já disponível.
+
 ## O que este repositório demonstra
 
 | Competência | Evidência no projeto |
