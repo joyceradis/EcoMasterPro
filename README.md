@@ -6,15 +6,17 @@
 
 [**Abrir demonstração**](https://joyceradis.github.io/EcoMasterPro/)
 
-## Papel no ecossistema Radis
+## Identidade e limites do projeto
 
-**EcoMaster Pro é uma ferramenta especializada de estudo e consulta em ecocardiografia.** Não é o motor de provas do Medical Residency Programs nem a base canônica do Segundo Cérebro.
+**Categoria:** produto independente de educação e referência em ecocardiografia, com **possível modelo comercial por assinatura no futuro**.
 
-**Integração planejada:** a Radis poderá abrir a referência e suas calculadoras a partir da área acadêmica ou clínica. Fórmulas, critérios e conteúdo especializado permanecem neste repositório; nenhuma sincronização automática com provas ou Constelação está implementada.
+O **EcoMaster Pro** não é uma ferramenta de atendimento ecocardiográfico pessoal da autora. A proposta é construir um produto que possa oferecer conteúdo organizado, interpretação contextual e funcionalidades especializadas a profissionais ou estudantes. O público-alvo, a precificação, as licenças, a autenticação de assinantes e a arquitetura comercial ainda devem ser definidos e validados.
 
-**Situação:** demonstração educacional com diferentes experimentos de interface; novas rotas, referências e testes são evolução do próprio produto, não requisitos para criar outra plataforma.
+Ele **não** pertence automaticamente à Radis nem ao mecanismo de tentativas do Medical Residency Programs. Eventual referência cruzada entre produtos deve decorrer de uma necessidade real, não de proximidade temática.
 
-**Rastreabilidade:** [histórico deste README](https://github.com/joyceradis/EcoMasterPro/commits/main/README.md) · [PRs do EcoMaster Pro](https://github.com/joyceradis/EcoMasterPro/pulls?q=is%3Apr).
+**Estado:** demonstração educacional e experimentos de interface; assinatura comercial **não implementada**.
+
+**Rastreabilidade:** [histórico do README](https://github.com/joyceradis/EcoMasterPro/commits/main/README.md) · [PRs](https://github.com/joyceradis/EcoMasterPro/pulls?q=is%3Apr).
 
 ## O que este repositório demonstra
 
