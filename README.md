@@ -6,6 +6,16 @@
 
 [**Abrir demonstração**](https://joyceradis.github.io/EcoMasterPro/)
 
+## Papel no ecossistema Radis
+
+**EcoMaster Pro é uma ferramenta especializada de estudo e consulta em ecocardiografia.** Não é o motor de provas do Medical Residency Programs nem a base canônica do Segundo Cérebro.
+
+**Integração planejada:** a Radis poderá abrir a referência e suas calculadoras a partir da área acadêmica ou clínica. Fórmulas, critérios e conteúdo especializado permanecem neste repositório; nenhuma sincronização automática com provas ou Constelação está implementada.
+
+**Situação:** demonstração educacional com diferentes experimentos de interface; novas rotas, referências e testes são evolução do próprio produto, não requisitos para criar outra plataforma.
+
+**Rastreabilidade:** [histórico deste README](https://github.com/joyceradis/EcoMasterPro/commits/main/README.md) · [PRs do EcoMaster Pro](https://github.com/joyceradis/EcoMasterPro/pulls?q=is%3Apr).
+
 ## O que este repositório demonstra
 
 | Competência | Evidência no projeto |
